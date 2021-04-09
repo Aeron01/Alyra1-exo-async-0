@@ -9,12 +9,10 @@ if (process.argv.length !== 3) {
 const main = async () => {
   try {
     const tmpHtml = await axios.get(process.argv[2])
-    const reponse = await tmpHtml
     await fsPromises.writeFile('index.html', tmpHtml.data)
     const stats = await fsPromises.stat('index.html')
-    await stats
-    console.log(`Download file completed.\n file size {stats.size} bytes`)
-    console.log(reponse.headers)
+    console.log(tmpHtml.headers)
+    console.log(`Download file completed.\n file size ${stats.size} bytes`)
   } catch (e) {
     console.log(e)
   }
